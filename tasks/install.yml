@@ -1,0 +1,46 @@
+---
+- name: create specjbb directory
+  file: path=/usr/local/benchmark/ state=directory mode=0755
+
+- name: Install deps packages via yum
+  yum: name={{ item }} state=present
+  when: ansible_os_family == 'RedHat' and ansible_distribution == "CentOS"
+  with_items:
+  - fontconfig
+  - libXfont
+  - libfontenc
+  - ttmkfdir
+  - xorg-x11-font-utils
+  - xorg-x11-fonts-Type1
+  - freetype-devel 
+  - numactl
+
+- name: Install deps packages via apt
+  apt: name={{ item }} state=present
+  when: ansible_os_family == 'Debian'
+  with_items:
+  - numactl
+
+- name: copy scripts to targetpath
+  copy: src=scripts dest=/usr/local/benchmark/specjbb mode=0755
+
+- name: downlaod SPECjbb to dest
+  get_url:
+    url: ftp://ftp:123456@192.168.1.116/specjbb2015.tar.gz
+    dest: /usr/local/benchmark/specjbb
+    mode: 0755
+  tags: spec1
+
+#temporary schedule
+# replace of ftp server on the future
+- name: Decompress specjbb tarball
+  unarchive:
+    src: /usr/local/benchmark/specjbb/specjbb2015.tar.gz
+    dest: /usr/local/benchmark/specjbb/
+    copy: yes
+  tags: spec2
+
+
+
+
+

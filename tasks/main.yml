@@ -1,0 +1,4 @@
+---
+# tasks file for specjbb/
+- include: install.yml
+  tags: [packages]

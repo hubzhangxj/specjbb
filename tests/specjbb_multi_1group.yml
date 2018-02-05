@@ -1,0 +1,30 @@
+- hosts: localhost
+  tasks:
+    - name: copy config to target 
+      copy: src=../files/scripts/specjbb2015_D05.props dest=/usr/local/benchmark/specjbb/specjbb2015/config mode=0755
+
+    - name: copy run script to target 
+      copy: src=../files/scripts/run_multi_1group.sh dest=/usr/local/benchmark/specjbb/specjbb2015 mode=0755
+
+
+    - name: run multi_1group 
+      #shell: ./run_multi_1group.sh >> multi_1group.log 
+      command: ./run_multi_1group.sh 
+      args:
+        chdir: /usr/local/benchmark/specjbb/specjbb2015
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
