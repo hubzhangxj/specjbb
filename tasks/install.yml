@@ -26,7 +26,7 @@
 
 - name: downlaod SPECjbb to dest
   get_url:
-    url: ftp://ftp:123456@192.168.1.116/specjbb2015.tar.gz
+    url: ftp://ftp:123456@htsat.vicp.cc/specjbb2015.tar.gz
     dest: /usr/local/benchmark/specjbb
     mode: 0755
   tags: spec1
